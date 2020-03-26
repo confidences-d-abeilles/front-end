@@ -3,7 +3,6 @@ import Input from '@cda/input';
 import Button from '@cda/button';
 import { Rows, Item } from '@cda/flex';
 import styled from '@emotion/styled';
-import { Link } from '@reach/router';
 
 const CustomRows = styled(Rows)`
   height: 100vh;
@@ -12,11 +11,14 @@ const CustomRows = styled(Rows)`
 export default () => (
   <CustomRows justifyContent="center" alignItems="center">
     <Item>
-      <h2>Login</h2>
-      <Input type="text" placeholder="email" />
-      <Input type="password" placeholder="password" />
+      <h2>Signup</h2>
+      <Input type="text" placeholder="Prénom" />
+      <Input type="text" placeholder="Nom" />
+      <Input type="email" placeholder="Adresse email" />
+      <Input type="tel" placeholder="Numéro de téléphone" />
+      <Input type="password" placeholder="Mot de passe" />
+      <Input type="password" placeholder="Confirmation du mot de passe" />
       <Button>Valider</Button>
-      <Link to="/signup">Pas encore de compte</Link>
     </Item>
   </CustomRows>
 );
