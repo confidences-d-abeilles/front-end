@@ -3,6 +3,7 @@ const path = require('path');
 
 module.exports = {
   mode: 'production',
+  entry: ['@babel/polyfill', './src/index.jsx'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.bundle.js',
@@ -12,6 +13,11 @@ module.exports = {
     compress: true,
     hot: true,
     historyApiFallback: true,
+    disableHostCheck: true,
+    https: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
     port: 9000,
   },
   module: {
@@ -21,7 +27,12 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
+            presets: [[
+              '@babel/preset-env', {
+                useBuiltIns: 'entry',
+                corejs: 3,
+              }],
+            '@babel/preset-react'],
           },
         },
       },
