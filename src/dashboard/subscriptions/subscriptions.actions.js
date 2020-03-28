@@ -1,0 +1,8 @@
+
+export const FETCH_SUBSCRIPTONS = 'FETCH_SUBSCRIPTONS';
+export const FETCH_SUBSCRIPTONS_SUCCESS = 'FETCH_SUBSCRIPTONS_SUCCESS';
+export const FETCH_SUBSCRIPTONS_FAIL = 'FETCH_SUBSCRIPTONS_FAIL';
+
+export const fetchSubscriptionsAction = () => ({
+  type: FETCH_SUBSCRIPTONS,
+});

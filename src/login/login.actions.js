@@ -1,11 +1,24 @@
 
+import client from '../utils/fetch';
+
 export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOGIN_RESUME = 'LOGIN_RESUME';
 
-
-export const login = (email, password) => ({
+export const loginAction = (email, password) => ({
   type: LOGIN,
   email,
   password,
 });
+
+export const loginResume = () => ({
+  type: LOGIN_RESUME,
+});
+
+export const logoutAction = () => {
+  return ({
+    type: LOGOUT,
+  });
+}

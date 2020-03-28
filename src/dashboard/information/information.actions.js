@@ -1,0 +1,8 @@
+
+export const FETCH_INFORMATION = 'FETCH_INFORMATION';
+export const FETCH_INFORMATION_SUCCESS = 'FETCH_INFORMATION_SUCCESS';
+export const FETCH_INFORMATION_FAIL = 'FETCH_INFORMATION_FAIL';
+
+export const fetchInformation = () => ({
+  type: FETCH_INFORMATION,
+});
