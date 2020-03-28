@@ -1,7 +1,7 @@
 import { FETCH_SUBSCRIPTONS_SUCCESS } from './subscriptions.actions';
 
 const initialState = {
-
+  subscriptions: [],
 };
 
 const reducer = (state = initialState, action) => {

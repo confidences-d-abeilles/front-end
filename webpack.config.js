@@ -9,6 +9,9 @@ module.exports = {
     filename: 'main.bundle.js',
     publicPath: '/',
   },
+  performance: {
+    hints: false,
+  },
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     compress: true,
@@ -21,6 +24,7 @@ module.exports = {
     },
     port: 9000,
   },
+  stats: 'errors-warnings',
   module: {
     rules: [
       {

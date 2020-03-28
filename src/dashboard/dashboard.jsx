@@ -7,6 +7,7 @@ import { navigate, Link, Router } from '@reach/router';
 import Information from './information/information';
 import Subscriptions from './subscriptions/subscriptions';
 import { logoutAction } from '../login/login.actions';
+import Orders from './orders/orders';
 
 const Dashboard = ({ logout, isLoggedIn }) => {
   const logoutHandler = useCallback(() => {
@@ -21,8 +22,6 @@ const Dashboard = ({ logout, isLoggedIn }) => {
 
   return (
     <>
-      <Button onClick={logoutHandler} type="button">Deconnexion</Button>
-      <br />
       <Link to="/dashboard/subscriptions"><Button type="button">Mes parrainages</Button></Link>
       <br />
       <Link to="/dashboard/orders"><Button type="button">Mes commandes</Button></Link>
@@ -31,10 +30,12 @@ const Dashboard = ({ logout, isLoggedIn }) => {
       <br />
       <Link to="/dashboard/account"><Button type="button">Mon compte</Button></Link>
       <br />
-
+      <Button onClick={logoutHandler} type="button" primary>Deconnexion</Button>
+      <br />
       <Router>
         <Information path="information" />
         <Subscriptions path="subscriptions" />
+        <Orders path="orders" />
       </Router>
     </>
   );

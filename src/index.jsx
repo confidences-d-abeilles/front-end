@@ -1,11 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { render } from 'react-dom';
-import { createStore, applyMiddleware, compose } from 'redux';
 import { connect, Provider } from 'react-redux';
-import createSagaMiddleware from 'redux-saga';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ThemeProvider } from 'emotion-theming';
 import theme from '@cda/theme';
@@ -13,30 +9,11 @@ import { Router } from '@reach/router';
 
 import Login from './login/login';
 import SignUp from './signup/signup';
-import rootReducer from './reducers';
-import rootSaga from './sagas';
 import { loginResume as loginResumeAction } from './login/login.actions';
 import Dashboard from './dashboard/dashboard';
+import { store, persistor } from './redux';
+import Beehive from './beehive/beehive';
 
-const persistConfig = {
-  key: 'root',
-  storage,
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-const sagaMiddleware = createSagaMiddleware();
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const enhancer = composeEnhancers(
-  applyMiddleware(sagaMiddleware),
-);
-const store = createStore(persistedReducer, enhancer);
-
-sagaMiddleware.run(rootSaga);
-
-const persistor = persistStore(store);
 
 const App = ({ loginResume }) => {
   useEffect(() => {
@@ -50,6 +27,7 @@ const App = ({ loginResume }) => {
           <Login path="login" />
           <SignUp path="signup" />
           <Dashboard path="dashboard/*" />
+          <Beehive path="beehive/:beehiveId" />
         </Router>
       </ThemeProvider>
     </PersistGate>

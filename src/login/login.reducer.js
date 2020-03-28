@@ -2,7 +2,7 @@ import {
   LOGIN, LOGIN_FAIL, LOGIN_RESUME, LOGIN_SUCCESS, LOGOUT,
 } from './login.actions';
 
-import client from '../utils/fetch';
+import client, { updateClientWithAuthorization } from '../utils/fetch';
 
 const initialState = {
   email: '',
@@ -24,11 +24,13 @@ const reducer = (state = initialState, action) => {
         message: initialState.message,
       };
     case LOGIN_RESUME:
-      client.defaults.headers.common.Authorization = `Bearer ${state.accessToken}`;
+      updateClientWithAuthorization(client, state.accessToken);
       return {
         ...state,
+        loading: false,
       };
     case LOGIN_SUCCESS:
+      updateClientWithAuthorization(client, action.accessToken);
       return {
         ...initialState,
         accessToken: action.accessToken,
