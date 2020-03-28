@@ -6,6 +6,7 @@ import storage from 'redux-persist/lib/storage';
 
 import rootSaga from './sagas';
 import rootReducer from './reducers';
+import authMiddleware from './middlewares/auth.middleware';
 
 const persistConfig = {
   key: 'root',
@@ -19,6 +20,7 @@ const sagaMiddleware = createSagaMiddleware();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const enhancer = composeEnhancers(
+  applyMiddleware(authMiddleware),
   applyMiddleware(sagaMiddleware),
 );
 
