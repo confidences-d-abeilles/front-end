@@ -6,7 +6,7 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_BEEHIVE_SUCCESS:
       return {
         ...state,

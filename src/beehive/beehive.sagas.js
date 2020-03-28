@@ -4,7 +4,6 @@ import { FETCH_BEEHIVE, FETCH_BEEHIVE_FAIL, FETCH_BEEHIVE_SUCCESS } from './beeh
 import client from '../utils/fetch';
 
 function* fetchBeehive({ id }) {
-  console.log(id);
   try {
     const { data } = yield client.request({
       method: 'get',
