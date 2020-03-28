@@ -23,4 +23,9 @@ module.exports = {
   ],
   rules: {
   },
+  overrides: [
+    {
+      excludedFiles: "*/**/"
+    }
+  ]
 };
