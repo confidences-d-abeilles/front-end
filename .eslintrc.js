@@ -20,12 +20,5 @@ module.exports = {
   },
   plugins: [
     'react',
-  ],
-  rules: {
-  },
-  overrides: [
-    {
-      excludedFiles: "*/**/"
-    }
   ]
 };
