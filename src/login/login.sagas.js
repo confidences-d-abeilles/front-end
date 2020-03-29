@@ -1,4 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects';
+import { decode } from 'jsonwebtoken';
 import {
   LOGIN, LOGIN_FAIL, LOGIN_REFRESH_TOKEN, LOGIN_SUCCESS, LOGOUT,
 } from './login.actions';
@@ -15,9 +16,10 @@ function* login({ email, password }) {
         password,
       },
     });
-    yield put({ type: LOGIN_SUCCESS, accessToken, refreshToken });
+    const { roles } = yield decode(accessToken);
+    yield put({ type: LOGIN_SUCCESS, accessToken, refreshToken, roles });
   } catch (e) {
-    yield put({ type: LOGIN_FAIL, message: e.response.data });
+    yield put({ type: LOGIN_FAIL, message: e.response && e.response.data });
   }
 }
 
@@ -32,10 +34,16 @@ function* refresh({ accessToken, refreshToken, action }) {
           refreshToken,
         },
       });
-    yield put({ type: LOGIN_SUCCESS, accessToken: newAccessToken, refreshToken: newRefreshToken });
+    const { roles } = yield decode(newAccessToken);
+    yield put({
+      type: LOGIN_SUCCESS,
+      accessToken: newAccessToken,
+      refreshToken: newRefreshToken,
+      roles,
+    });
     yield put(action);
   } catch (e) {
-    yield put({ type: LOGIN_FAIL, message: e.response.data });
+    yield put({ type: LOGIN_FAIL, message: e.response && e.response.data });
     yield put({ type: LOGOUT });
   }
 }

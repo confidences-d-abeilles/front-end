@@ -8,6 +8,7 @@ import Information from './information/information';
 import Subscriptions from './subscriptions/subscriptions';
 import { logoutAction } from '../login/login.actions';
 import Orders from './orders/orders';
+import Restrict from '../utils/restrict';
 
 const Dashboard = ({ logout, isLoggedIn }) => {
   const logoutHandler = useCallback(() => {
@@ -22,6 +23,30 @@ const Dashboard = ({ logout, isLoggedIn }) => {
 
   return (
     <>
+      <Restrict allowed={['admin']}>
+        <Link to="/dashboard/manage/user"><Button type="button">Gérer les utilisateurs</Button></Link>
+        <br />
+      </Restrict>
+      <Restrict allowed={['admin']}>
+        <Link to="/dashboard/manage/beehives"><Button type="button">Gérer les ruches</Button></Link>
+        <br />
+      </Restrict>
+      <Restrict allowed={['admin']}>
+        <Link to="/dashboard/manage/subscriptions"><Button type="button">Gérer les parrainages</Button></Link>
+        <br />
+      </Restrict>
+      <Restrict allowed={['admin']}>
+        <Link to="/dashboard/manage/labels"><Button type="button">Gérer les étiquettes</Button></Link>
+        <br />
+      </Restrict>
+      <Restrict allowed={['admin']}>
+        <Link to="/dashboard/manage/products"><Button type="button">Gérer les produits</Button></Link>
+        <br />
+      </Restrict>
+      <Restrict allowed={['admin']}>
+        <Link to="/dashboard/manage/discount"><Button type="button">Gérer les coupons</Button></Link>
+        <br />
+      </Restrict>
       <Link to="/dashboard/subscriptions"><Button type="button">Mes parrainages</Button></Link>
       <br />
       <Link to="/dashboard/orders"><Button type="button">Mes commandes</Button></Link>

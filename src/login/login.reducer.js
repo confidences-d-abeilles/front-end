@@ -11,6 +11,7 @@ const initialState = {
   accessToken: null,
   refreshToken: null,
   message: null,
+  roles: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -35,14 +36,13 @@ const reducer = (state = initialState, action) => {
         ...initialState,
         accessToken: action.accessToken,
         refreshToken: action.refreshToken,
+        roles: action.roles,
       };
     case LOGIN_FAIL:
       return { ...state, loading: false, message: action.message };
     case LOGOUT:
       return {
-        ...state,
-        accessToken: initialState.accessToken,
-        refreshToken: initialState.refreshToken,
+        ...initialState,
       };
     default:
       return state;
