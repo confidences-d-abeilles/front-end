@@ -5,13 +5,19 @@ import information from './dashboard/information/information.reducer';
 import subscriptions from './dashboard/subscriptions/subscriptions.reducer';
 import orders from './dashboard/orders/orders.reducer';
 import beehive from './beehive/beehive.reducer';
+import beehives from './dashboard/manage/beehives/beehives.reducer';
+import users from './dashboard/manage/users/users.reducer';
+import manageBeehive from './dashboard/manage/beehives/beehive/beehive.reducer';
 
 const rootReducer = combineReducers({
   login,
   information,
   subscriptions,
-  orders,
   beehive,
+  orders,
+  beehives,
+  users,
+  manageBeehive,
 });
 
 export default rootReducer;

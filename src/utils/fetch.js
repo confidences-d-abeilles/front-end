@@ -2,7 +2,7 @@
 import { create } from 'axios';
 
 const client = create({
-  baseURL: 'http://localhost:3000/',
+  baseURL: 'http://192.168.1.44:3000/',
   timeout: 1000,
 });
 

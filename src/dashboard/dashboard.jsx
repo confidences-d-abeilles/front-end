@@ -4,11 +4,15 @@ import Button from '@cda/button';
 import { connect } from 'react-redux';
 import { navigate, Link, Router } from '@reach/router';
 
+import { Item, Rows } from '@cda/flex/src';
 import Information from './information/information';
 import Subscriptions from './subscriptions/subscriptions';
 import { logoutAction } from '../login/login.actions';
 import Orders from './orders/orders';
 import Restrict from '../utils/restrict';
+import Beehives from './manage/beehives/beehives';
+import Users from './manage/users/users';
+import Beehive from './manage/beehives/beehive/beehive';
 
 const Dashboard = ({ logout, isLoggedIn }) => {
   const logoutHandler = useCallback(() => {
@@ -22,47 +26,54 @@ const Dashboard = ({ logout, isLoggedIn }) => {
   }, [isLoggedIn]);
 
   return (
-    <>
-      <Restrict allowed={['admin']}>
-        <Link to="/dashboard/manage/user"><Button type="button">Gérer les utilisateurs</Button></Link>
+    <Rows>
+      <Item>
+        <Restrict allowed={['admin']}>
+          <Link to="/dashboard/manage/users"><Button type="button">Gérer les utilisateurs</Button></Link>
+          <br />
+        </Restrict>
+        <Restrict allowed={['admin']}>
+          <Link to="/dashboard/manage/beehives"><Button type="button">Gérer les ruches</Button></Link>
+          <br />
+        </Restrict>
+        <Restrict allowed={['admin']}>
+          <Link to="/dashboard/manage/subscriptions"><Button type="button">Gérer les parrainages</Button></Link>
+          <br />
+        </Restrict>
+        <Restrict allowed={['admin']}>
+          <Link to="/dashboard/manage/labels"><Button type="button">Gérer les étiquettes</Button></Link>
+          <br />
+        </Restrict>
+        <Restrict allowed={['admin']}>
+          <Link to="/dashboard/manage/products"><Button type="button">Gérer les produits</Button></Link>
+          <br />
+        </Restrict>
+        <Restrict allowed={['admin']}>
+          <Link to="/dashboard/manage/discounts"><Button type="button">Gérer les coupons</Button></Link>
+          <br />
+        </Restrict>
+        <Link to="/dashboard/subscriptions"><Button type="button">Mes parrainages</Button></Link>
         <br />
-      </Restrict>
-      <Restrict allowed={['admin']}>
-        <Link to="/dashboard/manage/beehives"><Button type="button">Gérer les ruches</Button></Link>
+        <Link to="/dashboard/orders"><Button type="button">Mes commandes</Button></Link>
         <br />
-      </Restrict>
-      <Restrict allowed={['admin']}>
-        <Link to="/dashboard/manage/subscriptions"><Button type="button">Gérer les parrainages</Button></Link>
+        <Link to="/dashboard/information"><Button type="button">Mes informations</Button></Link>
         <br />
-      </Restrict>
-      <Restrict allowed={['admin']}>
-        <Link to="/dashboard/manage/labels"><Button type="button">Gérer les étiquettes</Button></Link>
+        <Link to="/dashboard/account"><Button type="button">Mon compte</Button></Link>
         <br />
-      </Restrict>
-      <Restrict allowed={['admin']}>
-        <Link to="/dashboard/manage/products"><Button type="button">Gérer les produits</Button></Link>
+        <Button onClick={logoutHandler} type="button" primary>Deconnexion</Button>
         <br />
-      </Restrict>
-      <Restrict allowed={['admin']}>
-        <Link to="/dashboard/manage/discount"><Button type="button">Gérer les coupons</Button></Link>
-        <br />
-      </Restrict>
-      <Link to="/dashboard/subscriptions"><Button type="button">Mes parrainages</Button></Link>
-      <br />
-      <Link to="/dashboard/orders"><Button type="button">Mes commandes</Button></Link>
-      <br />
-      <Link to="/dashboard/information"><Button type="button">Mes informations</Button></Link>
-      <br />
-      <Link to="/dashboard/account"><Button type="button">Mon compte</Button></Link>
-      <br />
-      <Button onClick={logoutHandler} type="button" primary>Deconnexion</Button>
-      <br />
-      <Router>
-        <Information path="information" />
-        <Subscriptions path="subscriptions" />
-        <Orders path="orders" />
-      </Router>
-    </>
+      </Item>
+      <Item flex="1">
+        <Router>
+          <Information path="information" />
+          <Subscriptions path="subscriptions" />
+          <Orders path="orders" />
+          <Beehives path="manage/beehives" />
+          <Beehive path="manage/beehive/:beehiveId" />
+          <Users path="manage/users" />
+        </Router>
+      </Item>
+    </Rows>
   );
 };
 

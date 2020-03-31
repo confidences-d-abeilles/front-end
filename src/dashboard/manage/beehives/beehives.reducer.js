@@ -1,21 +1,21 @@
-import { FETCH_BEEHIVE_SUCCESS } from './beehive.actions';
+import { FETCH_BEEHIVES_SUCCESS } from './beehives.actions';
 
 const initialState = {
-  name: null,
-  news: [],
-  images: [],
+  beehives: [],
 };
+
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_BEEHIVE_SUCCESS:
+    case FETCH_BEEHIVES_SUCCESS:
       return {
         ...state,
-        ...action.beehive,
+        beehives: action.beehives,
       };
     default:
       return state;
   }
 };
+
 
 export default reducer;

@@ -1,3 +1,5 @@
+
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
@@ -18,17 +20,18 @@ module.exports = {
     hot: true,
     historyApiFallback: true,
     disableHostCheck: true,
-    https: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
     port: 9000,
+    host: '0.0.0.0',
   },
   stats: 'errors-warnings',
   module: {
     rules: [
       {
         test: /\.jsx?$/,
+        include: path.resolve(__dirname, 'src'),
         use: {
           loader: 'babel-loader',
           options: {
@@ -41,6 +44,16 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          'file-loader',
+        ],
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   resolve: {
@@ -51,5 +64,6 @@ module.exports = {
       title: 'Association Confidences d\'Abeilles',
       template: './src/index.html',
     }),
+    new webpack.NamedModulesPlugin(),
   ],
 };
