@@ -6,7 +6,7 @@ import {
   CREATE_BEEHIVE_SUCCESS,
   FETCH_BEEHIVES,
   FETCH_BEEHIVES_FAIL,
-  FETCH_BEEHIVES_SUCCESS
+  FETCH_BEEHIVES_SUCCESS,
 } from './beehives.actions';
 import client from '../../../utils/fetch';
 

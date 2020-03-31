@@ -17,7 +17,9 @@ function* login({ email, password }) {
       },
     });
     const { roles } = yield decode(accessToken);
-    yield put({ type: LOGIN_SUCCESS, accessToken, refreshToken, roles });
+    yield put({
+      type: LOGIN_SUCCESS, accessToken, refreshToken, roles,
+    });
   } catch (e) {
     yield put({ type: LOGIN_FAIL, message: e.response && e.response.data });
   }

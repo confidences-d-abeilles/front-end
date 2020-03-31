@@ -2,7 +2,9 @@ import { put, takeEvery } from 'redux-saga/effects';
 import {
   FETCH_MANAGE_BEEHIVE,
   FETCH_MANAGE_BEEHIVE_FAIL,
-  FETCH_MANAGE_BEEHIVE_SUCCESS, fetchManageBeehiveAction, SAVE_NEWS, SAVE_NEWS_FAIL, SAVE_NEWS_SUCCESS,
+  FETCH_MANAGE_BEEHIVE_SUCCESS,
+  fetchManageBeehiveAction,
+  SAVE_NEWS, SAVE_NEWS_FAIL, SAVE_NEWS_SUCCESS,
   UPDATE_BEEHIVE, UPDATE_BEEHIVE_FAIL, UPDATE_BEEHIVE_SUCCESS, UPLOAD_BEEHIVE,
 } from './beehive.actions';
 import client from '../../../../utils/fetch';
@@ -46,7 +48,8 @@ function* uploadImg({ files, id }) {
       timeout: 30000,
     });
   } catch (e) {
-    console.error(e);
+    // TODO: Update with correct action
+    yield put({ type: UPDATE_BEEHIVE_FAIL });
   }
 }
 
@@ -65,7 +68,6 @@ function* saveNews({ data, beehiveId }) {
     yield put(fetchManageBeehiveAction(beehiveId));
     yield put({ type: SAVE_NEWS_SUCCESS });
   } catch (e) {
-    console.error(e);
     yield put({ type: SAVE_NEWS_FAIL });
   }
 }
