@@ -8,6 +8,8 @@ import beehive from './beehive/beehive.reducer';
 import beehives from './dashboard/manage/beehives/beehives.reducer';
 import users from './dashboard/manage/users/users.reducer';
 import manageBeehive from './dashboard/manage/beehives/beehive/beehive.reducer';
+import signup from './signup/signup.reducer';
+import address from './address/address.reducer';
 
 const rootReducer = combineReducers({
   login,
@@ -18,6 +20,8 @@ const rootReducer = combineReducers({
   beehives,
   users,
   manageBeehive,
+  signup,
+  address,
 });
 
 export default rootReducer;

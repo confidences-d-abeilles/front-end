@@ -13,6 +13,7 @@ import { loginResume as loginResumeAction } from './login/login.actions';
 import Dashboard from './dashboard/dashboard';
 import { store, persistor } from './redux';
 import Beehive from './beehive/beehive';
+import Address from './address/address';
 
 
 const App = ({ loginResume }) => {
@@ -26,6 +27,7 @@ const App = ({ loginResume }) => {
         <Router>
           <Login path="login" />
           <SignUp path="signup" />
+          <Address path="address" />
           <Dashboard path="dashboard/*" />
           <Beehive path="beehive/:beehiveId" />
         </Router>

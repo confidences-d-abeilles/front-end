@@ -21,6 +21,7 @@ function* login({ email, password }) {
       type: LOGIN_SUCCESS, accessToken, refreshToken, roles,
     });
   } catch (e) {
+    console.error(e);
     yield put({ type: LOGIN_FAIL, message: e.response && e.response.data });
   }
 }

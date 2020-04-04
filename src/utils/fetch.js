@@ -2,8 +2,8 @@
 import { create } from 'axios';
 
 const client = create({
-  baseURL: 'http://192.168.1.44:3000/',
-  timeout: 1000,
+  baseURL: 'http://localhost:3000/',
+  timeout: 5000,
 });
 
 export const updateClientWithAuthorization = (clientToUpdate, accessToken) => {
