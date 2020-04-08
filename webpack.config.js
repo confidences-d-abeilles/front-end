@@ -2,7 +2,6 @@
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -66,7 +65,6 @@ module.exports = {
       title: 'Association Confidences d\'Abeilles',
       template: './src/index.html',
     }),
-    new TerserPlugin(),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       reportFilename: 'stats.html',
