@@ -1,33 +1,32 @@
 
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  mode: 'production',
-  entry: './src/index.jsx',
+  mode: 'development',
+  entry: ['@babel/polyfill', './src/index.jsx'],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[hash].js',
+    filename: 'main.bundle.js',
     publicPath: '/',
   },
   performance: {
     hints: false,
   },
-  devtool: false,
-  stats: {
-    modules: false,
-    builtAt: false,
-    children: false,
-  },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      maxSize: 250000,
+  devServer: {
+    contentBase: path.resolve(__dirname, 'dist'),
+    compress: true,
+    hot: true,
+    historyApiFallback: true,
+    disableHostCheck: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
     },
+    port: 9000,
+    host: '0.0.0.0',
   },
+  stats: 'errors-warnings',
   module: {
     rules: [
       {
@@ -38,7 +37,7 @@ module.exports = {
           options: {
             presets: [[
               '@babel/preset-env', {
-                useBuiltIns: 'usage',
+                useBuiltIns: 'entry',
                 corejs: 3,
               }],
             '@babel/preset-react'],
@@ -61,16 +60,10 @@ module.exports = {
     extensions: ['.js', '.mjs', '.jsx', '.json'],
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Association Confidences d\'Abeilles',
       template: './src/index.html',
     }),
-    new TerserPlugin(),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      reportFilename: 'stats.html',
-      openAnalyzer: false,
-    }),
+    new webpack.NamedModulesPlugin(),
   ],
 };

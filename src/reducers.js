@@ -10,6 +10,7 @@ import users from './dashboard/manage/users/users.reducer';
 import manageBeehive from './dashboard/manage/beehives/beehive/beehive.reducer';
 import signup from './signup/signup.reducer';
 import address from './address/address.reducer';
+import wish from './wish/wish.reducer';
 
 const rootReducer = combineReducers({
   login,
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   manageBeehive,
   signup,
   address,
+  wish,
 });
 
 export default rootReducer;

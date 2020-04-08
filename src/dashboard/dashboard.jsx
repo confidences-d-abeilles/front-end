@@ -1,20 +1,28 @@
 import React, { useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@cda/button';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { navigate, Link, Router } from '@reach/router';
+import loadable from '@loadable/component'
 
 import { Item, Rows } from '@cda/flex/src';
-import Information from './information/information';
-import Subscriptions from './subscriptions/subscriptions';
 import { logoutAction } from '../login/login.actions';
-import Orders from './orders/orders';
-import Restrict from '../utils/restrict';
-import Beehives from './manage/beehives/beehives';
-import Users from './manage/users/users';
-import Beehive from './manage/beehives/beehive/beehive';
+import { fetchInformation } from './information/information.actions';
+import { fetchOrdersAction } from './orders/orders.actions';
+
+const Information = loadable(() => import(/* webpackChunkName: "information" */ './information/information'));
+const Subscriptions = loadable(() => import(/* webpackChunkName: "subscriptions" */ './subscriptions/subscriptions'));
+const Orders = loadable(() => import(/* webpackChunkName: "orders" */ './orders/orders'));
+const Restrict = loadable(() => import(/* webpackChunkName: "restrict" */ '../utils/restrict'));
+const Beehives = loadable(() => import(/* webpackChunkName: "beehives" */ './manage/beehives/beehives'));
+const Users = loadable(() => import(/* webpackChunkName: "users" */ './manage/users/users'));
+const Beehive = loadable(() => import(/* webpackChunkName: "manageBeehive" */ './manage/beehives/beehive/beehive'));
 
 const Dashboard = ({ logout, isLoggedIn }) => {
+  const dispatch = useDispatch();
+  const userInformation = useSelector(({ information }) => information);
+  const orders = useSelector(({ orders }) => orders);
+
   const logoutHandler = useCallback(() => {
     logout();
   }, [logout]);
@@ -23,7 +31,22 @@ const Dashboard = ({ logout, isLoggedIn }) => {
     if (!isLoggedIn) {
       navigate('/login');
     }
-  }, [isLoggedIn]);
+    if (!userInformation.deliveryAddress) {
+      navigate('/address');
+    }
+    if (!orders.length) {
+      navigate('/wish');
+    }
+  }, [isLoggedIn, userInformation, orders]);
+
+  useEffect(() => {
+    dispatch(fetchInformation());
+    dispatch(fetchOrdersAction());
+  }, []);
+
+  if (!userInformation.id) {
+    return 'Your dashboard is loading';
+  }
 
   return (
     <Rows>

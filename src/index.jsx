@@ -6,15 +6,18 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { ThemeProvider } from 'emotion-theming';
 import theme from '@cda/theme';
 import { Router } from '@reach/router';
+import loadable from '@loadable/component';
 
-import Login from './login/login';
-import SignUp from './signup/signup';
 import { loginResume as loginResumeAction } from './login/login.actions';
-import Dashboard from './dashboard/dashboard';
 import { store, persistor } from './redux';
-import Beehive from './beehive/beehive';
-import Address from './address/address';
+import ErrorBoundary from './utils/errorBoundary';
 
+const Dashboard = loadable(() => import(/* webpackChunkName: "dashboard" */ './dashboard/dashboard'));
+const Beehive = loadable(() => import(/* webpackChunkName: "beehive" */ './beehive/beehive'));
+const Address = loadable(() => import(/* webpackChunkName: "address" */ './address/address'));
+const Wish = loadable(() => import(/* webpackChunkName: "wish" */ './wish/wish'));
+const Login = loadable(() => import(/* webpackChunkName: "login" */ './login/login'));
+const SignUp = loadable(() => import(/* webpackChunkName: "signup" */ './signup/signup'));
 
 const App = ({ loginResume }) => {
   useEffect(() => {
@@ -22,17 +25,20 @@ const App = ({ loginResume }) => {
   }, []);
 
   return (
-    <PersistGate loading={null} persistor={persistor}>
-      <ThemeProvider theme={theme}>
-        <Router>
-          <Login path="login" />
-          <SignUp path="signup" />
-          <Address path="address" />
-          <Dashboard path="dashboard/*" />
-          <Beehive path="beehive/:beehiveId" />
-        </Router>
-      </ThemeProvider>
-    </PersistGate>
+    <ErrorBoundary>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThemeProvider theme={theme}>
+          <Router>
+            <Login path="/" />
+            <SignUp path="/signup" />
+            <Address path="/address" />
+            <Wish path="/wish" />
+            <Dashboard path="/dashboard/*" />
+            <Beehive path="/beehive/:beehiveId" />
+          </Router>
+        </ThemeProvider>
+      </PersistGate>
+    </ErrorBoundary>
   );
 };
 
