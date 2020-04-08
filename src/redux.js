@@ -11,6 +11,7 @@ import authMiddleware from './middlewares/auth.middleware';
 const persistConfig = {
   key: 'root',
   storage,
+  whitelist: [],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
