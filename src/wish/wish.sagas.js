@@ -1,5 +1,6 @@
-import { put, takeEvery } from 'redux-saga/effects';
-import { FETCH_PRODUCTS, FETCH_PRODUCTS_FAIL, FETCH_PRODUCTS_SUCCESS } from './wish.actions';
+import { put, takeEvery, select } from 'redux-saga/effects';
+import { FETCH_PRODUCTS, FETCH_PRODUCTS_FAIL, FETCH_PRODUCTS_SUCCESS, PLACE_ORDER, PLACE_ORDER_FAIL } from './wish.actions';
+import { getCart } from './wish.selectors.js';
 import client from '../utils/fetch';
 
 function* fetchProducts() {
@@ -14,8 +15,26 @@ function* fetchProducts() {
   }
 }
 
+function* placeOrder() {
+  try {
+    const cart = yield select(getCart);
+    yield client.request({
+      method: 'post',
+      url: '/order',
+      data: {
+        ...cart
+      },
+    });
+  } catch (e) {
+    console.error(e);
+    yield put({ type: PLACE_ORDER_FAIL }); 
+  } 
+}
+
 function* wishSagas() {
   yield takeEvery(FETCH_PRODUCTS, fetchProducts);
+  yield takeEvery(PLACE_ORDER, placeOrder);
 }
+
 
 export default wishSagas;

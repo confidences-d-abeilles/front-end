@@ -13,3 +13,12 @@ export const addProduct = (id) => ({
   type: ADD_PRODUCT,
   id,
 });
+
+export const PLACE_ORDER = 'PLACE_ORDER';
+export const PLACE_ORDER_SUCCESS = 'PLACE_ORDER_SUCCESS';
+export const PLACE_ORDER_FAIL = 'PLACE_ORDER_FAIL';
+
+export const placeOrder = (data) => ({
+  type: PLACE_ORDER,
+  ...data,
+});

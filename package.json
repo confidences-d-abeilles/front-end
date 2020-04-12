@@ -53,7 +53,7 @@
     "webpack-dev-server": "^3.10.3"
   },
   "scripts": {
-    "lint": "eslint . --cache",
+    "lint": "eslint . --cache --fix",
     "dev": "webpack-dev-server --config webpack.development.config.js",
     "build": "webpack"
   }

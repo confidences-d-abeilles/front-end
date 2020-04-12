@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from './wish.actions';
+import Button from '@cda/button';
+import { fetchProducts, placeOrder } from './wish.actions';
 import Product from './widgets/product';
 import { getProducts } from './wish.selectors';
 
@@ -12,7 +13,17 @@ const Wish = () => {
     dispatch(fetchProducts());
   }, []);
 
-  return products.map((product) => <Product {...product} key={product.id} />);
+  const onSubmit = useCallback((e) => {
+    e.preventDefault();
+    dispatch(placeOrder());
+  })
+
+  return (
+    <form onSubmit={onSubmit}>
+      {products.map((product) => <Product {...product} key={product.id} />)}
+      <Button type="submit">Passer commande</Button>
+    </form>
+  );
 };
 
 Wish.propTypes = {};
