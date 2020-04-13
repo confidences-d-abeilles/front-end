@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Rows } from '@cda/flex';
 import { fetchInformation as fetchInformationAction } from './information.actions';
 import Address from './widets/address';
+import Card from '../../components/card';
+import Hr from '../../components/hr';
+import H2 from '../../components/h2';
 
 const Information = ({
   fetchInformation, email, phone, name, firstname, billingAddress, deliveryAddress,
@@ -13,15 +17,18 @@ const Information = ({
 
   return (
     <div>
-      <h2>Mes informations</h2>
-      <p>{firstname}</p>
-      <p>{name}</p>
-      <p>{email}</p>
-      <p>{phone}</p>
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      {billingAddress && <Address {...billingAddress} />}
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      {deliveryAddress && <Address {...deliveryAddress} />}
+      <H2>Mes informations</H2>
+      <Rows>
+        <Card>
+          <p>{`${firstname} ${name}`}</p>
+          <p>{email}</p>
+          <p>{phone}</p>
+        </Card>
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+        {billingAddress && <Address {...billingAddress} />}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+        {deliveryAddress && <Address {...deliveryAddress} />}
+      </Rows>
     </div>
   );
 };

@@ -6,3 +6,10 @@ export const FETCH_ORDERS_FAIL = 'FETCH_ORDERS_FAIL';
 export const fetchOrdersAction = () => ({
   type: FETCH_ORDERS,
 });
+
+export const CHECKOUT = 'CHECKOUT';
+
+export const checkout = (id) => ({
+  type: CHECKOUT,
+  id,
+});

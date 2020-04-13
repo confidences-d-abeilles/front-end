@@ -8,6 +8,7 @@ import { createBeehiveAction, fetchBeehivesAction } from './beehives.actions';
 import Beehive from './widgets/beehive';
 import useInput from '../../../hooks/useInput';
 import Search from './widgets/search';
+import H2 from '../../../components/h2';
 
 const Beehives = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const Beehives = () => {
 
   return (
     <div>
-      <h2>Gestion des ruches</h2>
+      <H2>Gestion des ruches</H2>
       <Rows>
         <form onSubmit={onSubmit}>
           <Rows>
@@ -37,7 +38,7 @@ const Beehives = () => {
         <Search />
       </Rows>
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      {data.map((beehive) => <Beehive {...beehive} />)}
+      {data.map((beehive) => <Beehive {...beehive} key={beehive.id} />)}
     </div>
   );
 };

@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@cda/button": "0.10.3",
+    "@cda/button": "0.11.2",
     "@cda/flex": "^0.9.0",
     "@cda/input": "^0.9.0",
     "@cda/theme": "^0.9.0",
@@ -15,6 +15,7 @@
     "@emotion/styled": "^10.0.27",
     "@loadable/component": "^5.12.0",
     "@reach/router": "^1.3.3",
+    "@stripe/stripe-js": "^1.3.2",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "emotion-theming": "^10.0.27",

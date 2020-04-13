@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchSubscriptionsAction } from './subscriptions.actions';
 import Subscription from './widgets/subscription';
+import H2 from '../../components/h2';
 
 const Subscriptions = ({ fetchSubscriptions, subscriptions }) => {
   useEffect(() => {
@@ -11,7 +12,7 @@ const Subscriptions = ({ fetchSubscriptions, subscriptions }) => {
 
   return (
     <div>
-      <h2>Mes parrainages</h2>
+      <H2>Mes parrainages</H2>
       {subscriptions.map((subscription) => <Subscription {...subscription} />)}
     </div>
   );

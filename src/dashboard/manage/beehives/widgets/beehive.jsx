@@ -13,10 +13,14 @@ const Beehive = ({ name, identifier, id }) => (
   </div>
 );
 
+Beehive.defaultProps = {
+  identifier: '',
+};
+
 Beehive.propTypes = {
   name: PropTypes.string.isRequired,
-  identifier: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  identifier: PropTypes.string,
+  id: PropTypes.string.isRequired,
 };
 
 export default Beehive;
