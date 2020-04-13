@@ -11,7 +11,6 @@ import authMiddleware from './middlewares/auth.middleware';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: [],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -21,8 +20,8 @@ const sagaMiddleware = createSagaMiddleware();
 const composeEnhancers = process.env.NODE_ENV === 'production' ? compose : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const enhancer = composeEnhancers(
-  applyMiddleware(authMiddleware),
   applyMiddleware(sagaMiddleware),
+  applyMiddleware(authMiddleware),
 );
 
 export const store = createStore(persistedReducer, enhancer);

@@ -1,6 +1,8 @@
 import { put, takeEvery, select } from 'redux-saga/effects';
-import { FETCH_PRODUCTS, FETCH_PRODUCTS_FAIL, FETCH_PRODUCTS_SUCCESS, PLACE_ORDER, PLACE_ORDER_FAIL } from './wish.actions';
-import { getCart } from './wish.selectors.js';
+import {
+  FETCH_PRODUCTS, FETCH_PRODUCTS_FAIL, FETCH_PRODUCTS_SUCCESS, PLACE_ORDER, PLACE_ORDER_FAIL,
+} from './wish.actions';
+import { getCart } from './wish.selectors';
 import client from '../utils/fetch';
 
 function* fetchProducts() {
@@ -22,13 +24,13 @@ function* placeOrder() {
       method: 'post',
       url: '/order',
       data: {
-        products: cart
+        products: cart,
       },
     });
   } catch (e) {
     console.error(e);
-    yield put({ type: PLACE_ORDER_FAIL }); 
-  } 
+    yield put({ type: PLACE_ORDER_FAIL });
+  }
 }
 
 function* wishSagas() {

@@ -1,5 +1,5 @@
-import { SIGNUP_FAIL, SIGNUP_SUCCESS } from './signup.actions';
 import { navigate } from '@reach/router';
+import { SIGNUP_FAIL, SIGNUP_SUCCESS } from './signup.actions';
 
 const initialState = {
   error: null,

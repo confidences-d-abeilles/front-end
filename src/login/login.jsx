@@ -5,7 +5,7 @@ import Input from '@cda/input';
 import Button from '@cda/button';
 import { Rows, Item } from '@cda/flex';
 import styled from '@emotion/styled';
-import { Link, navigate } from '@reach/router';
+import { Link } from '@reach/router';
 
 import useInput from '../hooks/useInput';
 import { loginAction } from './login.actions';
@@ -30,13 +30,6 @@ const Login = () => {
     setEmail(initialEmail);
     setPassword(initialPassword);
   }, [initialEmail, initialPassword]);
-
-  useEffect(() => {
-    // FIXME: This is an anti-pattern, triggering side-effects in here should not happen
-    if (accessToken) {
-      navigate('/dashboard');
-    }
-  }, accessToken);
 
   return (
     <CustomRows justifyContent="center" alignItems="center">
