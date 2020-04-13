@@ -22,7 +22,7 @@ function* placeOrder() {
       method: 'post',
       url: '/order',
       data: {
-        ...cart
+        products: cart
       },
     });
   } catch (e) {

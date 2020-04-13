@@ -10,7 +10,7 @@ const initialState = {
   loading: false,
   accessToken: null,
   refreshToken: null,
-  message: null,
+  message: '',
   roles: [],
 };
 

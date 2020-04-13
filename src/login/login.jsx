@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Input from '@cda/input';
 import Button from '@cda/button';
 import { Rows, Item } from '@cda/flex';
@@ -9,20 +9,21 @@ import { Link, navigate } from '@reach/router';
 
 import useInput from '../hooks/useInput';
 import { loginAction } from './login.actions';
+import { getLogin } from './login.selectors.js';
 
 const CustomRows = styled(Rows)`
   height: 100vh;
 `;
 
-const Login = ({
-  loginAction: login, loading, email: initialEmail, password: initialPassword, message, accessToken,
-}) => {
+const Login = () => {
+  const dispatch = useDispatch();
+  const { message, accessToken, loading, initialEmail, initialPassword } = useSelector(getLogin);
   const [email, handleEmail, setEmail] = useInput(initialEmail);
   const [password, handlePassword, setPassword] = useInput(initialPassword);
 
   const onSubmit = useCallback((e) => {
     e.preventDefault();
-    login(email, password);
+    dispatch(loginAction(email, password));
   }, [email, password]);
 
   useEffect(() => {
@@ -31,6 +32,7 @@ const Login = ({
   }, [initialEmail, initialPassword]);
 
   useEffect(() => {
+    // FIXME: This is an anti-pattern, triggering side-effects in here should not happen
     if (accessToken) {
       navigate('/dashboard');
     }
@@ -51,20 +53,5 @@ const Login = ({
   );
 };
 
-const mapStateToProps = ({ login }) => ({
-  ...login,
-});
+export default Login;
 
-const mapDispatchToProps = (dispatch) => ({
-  loginAction: (email, password) => dispatch(loginAction(email, password)),
-});
-
-Login.propTypes = {
-  loginAction: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-  email: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  message: PropTypes.string.isRequired,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
