@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import Button from '@cda/button';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { navigate, Link, Router } from '@reach/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Router } from '@reach/router';
 import loadable from '@loadable/component'
 
 import { Item, Rows } from '@cda/flex/src';
@@ -18,26 +17,14 @@ const Beehives = loadable(() => import(/* webpackChunkName: "beehives" */ './man
 const Users = loadable(() => import(/* webpackChunkName: "users" */ './manage/users/users'));
 const Beehive = loadable(() => import(/* webpackChunkName: "manageBeehive" */ './manage/beehives/beehive/beehive'));
 
-const Dashboard = ({ logout, isLoggedIn }) => {
+const Dashboard = ({ logout }) => {
   const dispatch = useDispatch();
   const userInformation = useSelector(({ information }) => information);
-  const orders = useSelector(({ orders }) => orders);
 
   const logoutHandler = useCallback(() => {
-    logout();
+    dispatch(logoutAction());
   }, [logout]);
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/login');
-    }
-    if (!userInformation.deliveryAddress) {
-      navigate('/address');
-    }
-    if (!orders.length) {
-      navigate('/wish');
-    }
-  }, [isLoggedIn, userInformation, orders]);
 
   useEffect(() => {
     dispatch(fetchInformation());
@@ -100,17 +87,4 @@ const Dashboard = ({ logout, isLoggedIn }) => {
   );
 };
 
-Dashboard.propTypes = {
-  logout: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = ({ login }) => ({
-  isLoggedIn: Boolean(login.accessToken),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  logout: () => dispatch(logoutAction()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default Dashboard;
