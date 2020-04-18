@@ -10,6 +10,9 @@ import { fetchManageBeehiveAction, updateBeehive, uploadBeehiveAction } from './
 import { getBeehive } from './beehive.selectors';
 import useInput from '../../../../hooks/useInput';
 import News from './news/newPanel';
+import H2 from '../../../../components/h2';
+import Card from '../../../../components/card';
+import ImageGallery from '../../../../components/imageGallery';
 
 const Component = ({ beehiveId }) => {
   const dispatch = useDispatch();
@@ -43,34 +46,52 @@ const Component = ({ beehiveId }) => {
   }
 
   const {
-    name, occupation, news, lat, long, temp_in: tempIn, temp_out: tempOut, hygrometry,
+    name, occupation, news, lat, long, temp_in: tempIn, temp_out: tempOut, hygrometry, images,
   } = beehive;
 
   return (
     <div>
-      <h2>{`Ruche ${name}`}</h2>
-      <QR value={window.location.href} />
-      <form onSubmit={onFileSubmit}>
-        <input type="file" ref={fileInput} accept="image/*" multiple />
-        <Button type="submit" primary>Envoyer</Button>
-      </form>
-      <form onSubmit={onSubmit}>
+      <H2>{`Ruche ${name}`}</H2>
+      <Rows wrap="wrap">
+        <Card><QR value={window.location.href} /></Card>
+        <Card>
+          <p>
+            {`Parrainée à ${occupation}%`}
+            <br />
+            Taille de la ruche : 10 cadres
+            <br />
+            Nombre de hausses : 0
+            <br />
+            {`Température intérieure : ${tempIn}°C`}
+            <br />
+            {`Température exterieure : ${tempOut}°C`}
+            <br />
+            {`Hygrométrie : ${hygrometry}%`}
+            <br />
+            {`Latitude : ${lat}`}
+            <br />
+            {`Longitude : ${long}`}
+          </p>
+        </Card>
+        <Card>
+          <form onSubmit={onSubmit}>
+            <Rows>
+              <p>Identifiant</p>
+              <Input type="text" placeholder="Identifiant" value={newId} onChange={handleNewId} />
+            </Rows>
+            <Button type="submit" primary>Enregistrer</Button>
+          </form>
+        </Card>
+      </Rows>
+      <Card>
         <Rows>
-          <p>Identifiant</p>
-          <Input type="text" placeholder="Identifiant" value={newId} onChange={handleNewId} />
+          <ImageGallery images={images} />
+          <form onSubmit={onFileSubmit}>
+            <input type="file" ref={fileInput} accept="image/*" multiple />
+            <Button type="submit" primary>Envoyer</Button>
+          </form>
         </Rows>
-        <p>{`Parrainée à ${occupation}%`}</p>
-        <p>Taille de la ruche : 10 cadres</p>
-        <p>Nombre de hausses : 0</p>
-        <h3>Conditions climatiques</h3>
-        <p>{`Température intérieure : ${tempIn}°C`}</p>
-        <p>{`Température exterieure : ${tempOut}°C`}</p>
-        <p>{`Hygrométrie : ${hygrometry}%`}</p>
-        <h3>Position</h3>
-        <p>{`Latitude : ${lat}`}</p>
-        <p>{`Longitude : ${long}`}</p>
-        <Button type="submit" primary>Enregistrer</Button>
-      </form>
+      </Card>
       <h3>News</h3>
       <News data={news} beehiveId={beehiveId} />
     </div>

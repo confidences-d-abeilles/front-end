@@ -13,7 +13,8 @@ const Subscriptions = ({ fetchSubscriptions, subscriptions }) => {
   return (
     <div>
       <H2>Mes parrainages</H2>
-      {subscriptions.map((subscription) => <Subscription {...subscription} />)}
+      {subscriptions
+        .map((subscription) => <Subscription {...subscription} key={subscription.id} />)}
     </div>
   );
 };
@@ -28,6 +29,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 Subscriptions.propTypes = {
   fetchSubscriptions: PropTypes.func.isRequired,
+  subscriptions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Subscriptions);
