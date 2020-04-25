@@ -1,10 +1,9 @@
 import React, { useCallback } from 'react';
-import PropTypes from 'prop-types';
 import { Item, Rows } from '@cda/flex';
 import Button from '@cda/button';
 import Input from '@cda/input';
-import useInput from '../hooks/useInput';
 import { useDispatch, useSelector } from 'react-redux';
+import useInput from '../hooks/useInput';
 import { submitAddress } from './address.actions';
 
 const Address = () => {
@@ -38,10 +37,12 @@ const Address = () => {
       <Item>
         <form onSubmit={handleSubmit}>
           <h2>Adresse de livraison</h2>
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label>
             <Input type="radio" name="gender" value="male" checked={gender === 'male'} onChange={handleGender} />
             Homme
           </label>
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label>
             <Input type="radio" name="gender" value="female" checked={gender === 'female'} onChange={handleGender} />
             Femme
@@ -54,7 +55,8 @@ const Address = () => {
           <Input type="text" value={zipcode} onChange={handleZipcode} placeholder="Code postal" />
           <Input type="text" value={city} onChange={handleCity} placeholder="Ville" />
           <Input type="text" value={country} onChange={handleCountry} placeholder="Pays" />
-          <Button type="submit">Valider</Button>{message}
+          <Button type="submit">Valider</Button>
+          {message}
         </form>
       </Item>
     </Rows>

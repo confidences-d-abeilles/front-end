@@ -4,8 +4,8 @@ import Input from '@cda/input';
 import { Rows } from '@cda/flex';
 import Button from '@cda/button';
 
-import useInput from '../../../hooks/useInput';
 import { useDispatch } from 'react-redux';
+import useInput from '../../../hooks/useInput';
 import { updateInformation } from '../information.actions';
 
 const EditInformation = ({

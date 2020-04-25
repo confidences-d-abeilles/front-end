@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from '../../../../components/card';
 import { Link } from '@reach/router';
+import Card from '../../../../components/card';
 
 const User = ({ id, name, firstname }) => (
   <Card>

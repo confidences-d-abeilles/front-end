@@ -14,7 +14,7 @@ const Subscriptions = () => {
   return (
     <>
       <H2>Gestion des parrainages</H2>
-      {subscriptions.map(({ product }) => <Card>{product.name}</Card>)}
+      {subscriptions.map(({ product, id }) => <Card key={id}>{product.name}</Card>)}
     </>
   );
 };

@@ -12,13 +12,13 @@ const Item = styled('p')`
   width: 10rem;
 `;
 
-const NewItem = ({ data, onClick }) => {
-
-  return <Item onClick={onClick}>{data.title}</Item>;
-};
+const NewItem = ({ data, onClick }) => <Item onClick={onClick}>{data.title}</Item>;
 
 NewItem.propTypes = {
   onClick: PropTypes.func.isRequired,
+  data: PropTypes.objectOf({
+    title: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default NewItem;

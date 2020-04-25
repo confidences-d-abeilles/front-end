@@ -28,7 +28,6 @@ function* placeOrder() {
       },
     });
   } catch (e) {
-    console.error(e);
     yield put({ type: PLACE_ORDER_FAIL });
   }
 }

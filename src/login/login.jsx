@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import Input from '@cda/input';
 import Button from '@cda/button';
@@ -9,7 +8,7 @@ import { Link } from '@reach/router';
 
 import useInput from '../hooks/useInput';
 import { loginAction } from './login.actions';
-import { getLogin } from './login.selectors.js';
+import { getLogin } from './login.selectors';
 
 const CustomRows = styled(Rows)`
   height: 100vh;
@@ -17,7 +16,9 @@ const CustomRows = styled(Rows)`
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { message, loading, email: initialEmail, password: initialPassword } = useSelector(getLogin);
+  const {
+    message, loading, email: initialEmail, password: initialPassword,
+  } = useSelector(getLogin);
   const [email, handleEmail, setEmail] = useInput(initialEmail);
   const [password, handlePassword, setPassword] = useInput(initialPassword);
 
@@ -38,7 +39,8 @@ const Login = () => {
         <form onSubmit={onSubmit}>
           <Input type="text" placeholder="email" onChange={handleEmail} value={email} disabled={loading} />
           <Input type="password" placeholder="password" onChange={handlePassword} value={password} disabled={loading} />
-          <Button type="submit" disabled={loading}>Valider</Button>{message}
+          <Button type="submit" disabled={loading}>Valider</Button>
+          {message}
         </form>
         <Link to="/signup">Pas encore de compte</Link>
       </Item>
@@ -47,4 +49,3 @@ const Login = () => {
 };
 
 export default Login;
-

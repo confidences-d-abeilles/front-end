@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useCallback } from 'react';
 import Input from '@cda/input';
 import Button from '@cda/button';
@@ -20,7 +21,7 @@ export default () => {
   const [confirm, handleConfirm] = useInput('');
   const [gender, handleGender] = useInput('male');
   const dispatch = useDispatch();
-  const message = useSelector(({ signup }) => signup.error);
+  const message = useSelector(({ signup: signUpState }) => signUpState.error);
 
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
@@ -39,13 +40,13 @@ export default () => {
     <CustomRows justifyContent="center" alignItems="center">
       <Item>
         <form onSubmit={handleSubmit}>
-          <h2>Signup</h2>
-          <label>
-            <Input type="radio" name="gender" value="male" checked={gender === 'male'} onChange={handleGender} />
+          <h2>SignUp</h2>
+          <label htmlFor="male">
+            <Input type="radio" name="gender" value="male" checked={gender === 'male'} id="male" onChange={handleGender} />
             Homme
           </label>
-          <label>
-            <Input type="radio" name="gender" value="female" checked={gender === 'female'} onChange={handleGender} />
+          <label htmlFor="female">
+            <Input type="radio" name="gender" value="female" checked={gender === 'female'} id="female" onChange={handleGender} />
             Femme
           </label>
           <Input type="text" placeholder="Prénom" value={firstname} onChange={handleFirstname} />
@@ -54,7 +55,8 @@ export default () => {
           <Input type="tel" placeholder="Numéro de téléphone" value={phone} onChange={handlePhone} />
           <Input type="password" placeholder="Mot de passe" value={password} onChange={handlePassword} />
           <Input type="password" placeholder="Confirmation du mot de passe" value={confirm} onChange={handleConfirm} />
-          <Button>Valider</Button>{message}
+          <Button>Valider</Button>
+          {message}
         </form>
       </Item>
     </CustomRows>

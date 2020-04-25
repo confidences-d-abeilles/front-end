@@ -1,6 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import client from '../../utils/fetch';
-import { FETCH_DATA_REGEX, fetchDataFail, fetchDataSuccess } from './useApi.actions';
+import { fetchDataFail, fetchDataSuccess, matchFetch } from './useApi.actions';
 
 function* fetch({ resource, id }) {
   try {
@@ -15,7 +15,7 @@ function* fetch({ resource, id }) {
 }
 
 function* useApiSagas() {
-  yield takeEvery((action) => FETCH_DATA_REGEX.test(action.type), fetch);
+  yield takeEvery((action) => matchFetch(action.type), fetch);
 }
 
 export default useApiSagas;

@@ -19,6 +19,9 @@ const Product = ({ name, id }) => {
   );
 };
 
-Product.propTypes = {};
+Product.propTypes = {
+  name: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+};
 
 export default Product;

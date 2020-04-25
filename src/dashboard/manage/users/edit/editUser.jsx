@@ -5,8 +5,7 @@ import Loading from '../../../../components/loading';
 import useApi from '../../../../hooks/useApi';
 
 const EditUser = ({ id }) => {
-
-  const user = useApi('user', '26');
+  const user = useApi('user', id);
 
   if (!user) {
     return <Loading />;

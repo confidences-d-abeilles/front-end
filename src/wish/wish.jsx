@@ -16,10 +16,11 @@ const Wish = () => {
   const onSubmit = useCallback((e) => {
     e.preventDefault();
     dispatch(placeOrder());
-  })
+  });
 
   return (
     <form onSubmit={onSubmit}>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       {products.map((product) => <Product {...product} key={product.id} />)}
       <Button type="submit">Passer commande</Button>
     </form>

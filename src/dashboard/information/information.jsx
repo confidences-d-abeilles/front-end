@@ -1,6 +1,4 @@
 import React, { useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import Button from '@cda/button';
 import { Rows } from '@cda/flex';
 import Address from './widets/address';
@@ -33,8 +31,15 @@ const Information = () => {
       <Rows>
         <Card>
           {edit
-            ? <EditInformation email={email} firstName={firstname} name={name} phone={phone} cb={toggleEdit} />
-            : (
+            ? (
+              <EditInformation
+                email={email}
+                firstName={firstname}
+                name={name}
+                phone={phone}
+                cb={toggleEdit}
+              />
+            ) : (
               <>
                 <DisplayInformation email={email} firstName={firstname} name={name} phone={phone} />
                 <Button onClick={toggleEdit} flat>Modifier</Button>
@@ -50,20 +55,4 @@ const Information = () => {
   );
 };
 
-const mapStateToProps = ({ information }) => ({
-  ...information,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  fetchInformation: () => dispatch(fetchInformationAction()),
-});
-
-Information.propTypes = {
-  fetchInformation: PropTypes.func.isRequired,
-  email: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  firstname: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Information);
+export default Information;

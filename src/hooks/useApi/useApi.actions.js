@@ -1,5 +1,5 @@
 
-export const FETCH_DATA_REGEX = /^useApi\/FETCH_[^_\W]*_[^_\W]*$/;
+const FETCH_DATA_REGEX = /^useApi\/FETCH_[^_\W]*_[^_\W]*$/;
 export const matchFetch = (str) => FETCH_DATA_REGEX.test(str);
 
 export const fetchData = (resource, id) => ({
@@ -8,7 +8,7 @@ export const fetchData = (resource, id) => ({
   id,
 });
 
-export const FETCH_DATA_REGEX_SUCCESS = /^useApi\/FETCH_[^_\W]*_[^_\W]*_SUCCESS$/;
+const FETCH_DATA_REGEX_SUCCESS = /^useApi\/FETCH_[^_\W]*_[^_\W]*_SUCCESS$/;
 export const matchFetchSuccess = (str) => FETCH_DATA_REGEX_SUCCESS.test(str);
 
 export const fetchDataSuccess = (resource, id, data) => ({

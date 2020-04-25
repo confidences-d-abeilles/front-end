@@ -1,25 +1,9 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import {
-  FETCH_MANAGE_BEEHIVE,
-  FETCH_MANAGE_BEEHIVE_FAIL,
-  FETCH_MANAGE_BEEHIVE_SUCCESS,
-  fetchManageBeehiveAction,
   SAVE_NEWS, SAVE_NEWS_FAIL, SAVE_NEWS_SUCCESS,
   UPDATE_BEEHIVE, UPDATE_BEEHIVE_FAIL, UPDATE_BEEHIVE_SUCCESS, UPLOAD_BEEHIVE,
 } from './beehive.actions';
 import client from '../../../../utils/fetch';
-
-function* fetchBeehive({ id }) {
-  try {
-    const { data } = yield client.request({
-      method: 'get',
-      url: `/beehive/${id}`,
-    });
-    yield put({ type: FETCH_MANAGE_BEEHIVE_SUCCESS, data });
-  } catch (e) {
-    yield put({ type: FETCH_MANAGE_BEEHIVE_FAIL });
-  }
-}
 
 function* updateBeehive({ data, id }) {
   try {
@@ -29,10 +13,8 @@ function* updateBeehive({ data, id }) {
       data,
     });
     yield put({ type: UPDATE_BEEHIVE_SUCCESS });
-    yield put(fetchManageBeehiveAction(id));
   } catch (e) {
     yield put({ type: UPDATE_BEEHIVE_FAIL });
-    yield put(fetchManageBeehiveAction(id));
   }
 }
 
@@ -65,7 +47,6 @@ function* saveNews({ data, beehiveId }) {
         beehive: beehiveId,
       },
     });
-    yield put(fetchManageBeehiveAction(beehiveId));
     yield put({ type: SAVE_NEWS_SUCCESS });
   } catch (e) {
     yield put({ type: SAVE_NEWS_FAIL });
@@ -73,7 +54,6 @@ function* saveNews({ data, beehiveId }) {
 }
 
 function* beehiveSagas() {
-  yield takeEvery(FETCH_MANAGE_BEEHIVE, fetchBeehive);
   yield takeEvery(UPDATE_BEEHIVE, updateBeehive);
   yield takeEvery(UPLOAD_BEEHIVE, uploadImg);
   yield takeEvery(SAVE_NEWS, saveNews);

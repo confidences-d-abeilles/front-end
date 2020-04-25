@@ -1,6 +1,3 @@
-export const FETCH_MANAGE_BEEHIVE = 'FETCH_MANAGE_BEEHIVE';
-export const FETCH_MANAGE_BEEHIVE_SUCCESS = 'FETCH_MANAGE_BEEHIVE_SUCCESS';
-export const FETCH_MANAGE_BEEHIVE_FAIL = 'FETCH_MANAGE_BEEHIVE_FAIL';
 
 export const UPDATE_BEEHIVE = 'UPDATE_BEEHIVE';
 export const UPDATE_BEEHIVE_SUCCESS = 'UPDATE_BEEHIVE_SUCCESS';
@@ -13,11 +10,6 @@ export const UPLOAD_BEEHIVE_FAIL = 'UPLOAD_BEEHIVE_FAIL';
 export const SAVE_NEWS = 'SAVE_NEWS';
 export const SAVE_NEWS_SUCCESS = 'SAVE_NEWS_SUCCESS';
 export const SAVE_NEWS_FAIL = 'SAVE_NEWS_FAIL';
-
-export const fetchManageBeehiveAction = (id) => ({
-  type: FETCH_MANAGE_BEEHIVE,
-  id,
-});
 
 export const updateBeehive = (id, data) => ({
   type: UPDATE_BEEHIVE,

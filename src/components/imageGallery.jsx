@@ -17,14 +17,11 @@ const Image = styled('div')`
   box-shadow: 0 0 5px silver;
 `;
 
-const ImageGallery = ({ images }) => {
-
-  return (
-    <Wrapper>
-      {images.map((img) => <Image src={`http://localhost:3000/static/${img}`} alt={img} key={img} />)}
-    </Wrapper>
-  );
-};
+const ImageGallery = ({ images }) => (
+  <Wrapper>
+    {images.map((img) => <Image src={`http://localhost:3000/static/${img}`} alt={img} key={img} />)}
+  </Wrapper>
+);
 
 ImageGallery.propTypes = {
   images: PropTypes.arrayOf(PropTypes.string).isRequired,

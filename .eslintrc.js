@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
+    jest: true
   },
   extends: [
     'plugin:react/recommended',
@@ -20,5 +21,7 @@ module.exports = {
   },
   plugins: [
     'react',
-  ]
+    'jest',
+  ],
+  parser: 'babel-eslint'
 };

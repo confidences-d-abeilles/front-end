@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Card from '../../../components/card';
 
-const Address = ({ firstname, name, line1, line2, city, country }) => (
+const Address = ({
+  firstname, name, line1, line2, city, country,
+}) => (
   <Card>
     <p>{`${firstname} ${name}`}</p>
     <p>{line1}</p>

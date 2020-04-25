@@ -6,9 +6,9 @@ import 'react-quill/dist/quill.snow.css';
 import Button from '@cda/button';
 import Input from '@cda/input';
 
+import { useDispatch } from 'react-redux';
 import NewsItem from './newsItem';
 import useInput from '../../../../../hooks/useInput';
-import { useDispatch } from 'react-redux';
 import { saveNews } from '../beehive.actions';
 
 const News = ({ data, beehiveId }) => {
@@ -44,7 +44,9 @@ const News = ({ data, beehiveId }) => {
   return (
     <Rows>
       <Item>
-        {data.map((item, index) => <NewsItem data={item} onClick={() => setSelectedNews(index)} key={item.id} />)}
+        {data.map((item, index) => (
+          <NewsItem data={item} onClick={() => setSelectedNews(index)} key={item.id} />
+        ))}
         <Button onClick={create}>Ajouter</Button>
       </Item>
       <Item>

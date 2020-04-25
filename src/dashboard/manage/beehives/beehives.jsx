@@ -38,9 +38,12 @@ const Beehives = () => {
         </form>
         <Search />
       </Rows>
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      {data
-        .map((beehive) => <Card key={beehive.id}><Beehive {...beehive} key={beehive.id} /></Card>)}
+      {data.map((beehive) => (
+        <Card key={beehive.id}>
+          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+          <Beehive {...beehive} key={beehive.id} />
+        </Card>
+      ))}
     </div>
   );
 };

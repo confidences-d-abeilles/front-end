@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Router } from '@reach/router';
-import loadable from '@loadable/component'
+import loadable from '@loadable/component';
 import styled from '@emotion/styled';
 import { Item, Rows } from '@cda/flex';
 
@@ -9,7 +9,6 @@ import logo from '../logo-square.png';
 import me from '../me.png';
 
 import { logoutAction } from '../login/login.actions';
-import { fetchOrdersAction } from './orders/orders.actions';
 
 const Information = loadable(() => import(/* webpackChunkName: "information" */ './information/information'));
 const Subscriptions = loadable(() => import(/* webpackChunkName: "subscriptions" */ './subscriptions/subscriptions'));
@@ -40,11 +39,11 @@ const ClickableItem = styled('button')`
   width: 100%;
   background: none;
   font-size: 1rem;
-  color: ${({ active }) => active ? 'black' : 'gray'};
-  font-weight: ${({ active }) => active ? '500' : '300'};
+  color: ${({ active }) => (active ? 'black' : 'gray')};
+  font-weight: ${({ active }) => (active ? '500' : '300')};
   letter-spacing: 0.1rem;
   border-style: solid;
-  border-color: ${({ active }) => active ? '#E49C00' : 'transparent'};
+  border-color: ${({ active }) => (active ? '#E49C00' : 'transparent')};
   border-width: 0 4px 0 0;
   outline: none;
   cursor: pointer;
@@ -54,7 +53,7 @@ const ClickableItem = styled('button')`
   transition: border-color 0.25s ease-in-out;
   
   &:hover, &:focus {
-    border-color: ${({ active }) => active ? '#E49C00' : 'silver'};
+    border-color: ${({ active }) => (active ? '#E49C00' : 'silver')};
     outline: none;
     color: black;
   }
@@ -86,18 +85,14 @@ const Name = styled('p')`
  font-weight: 900;
 `;
 
-const Dashboard = ({ logout }) => {
+const Dashboard = () => {
   const dispatch = useDispatch();
   const userInformation = useSelector(({ information }) => information);
 
   const logoutHandler = useCallback(() => {
     dispatch(logoutAction());
-  }, [logout]);
-
-
-  useEffect(() => {
-    dispatch(fetchOrdersAction());
   }, []);
+
 
   if (!userInformation.id) {
     return 'Your dashboard is loading';

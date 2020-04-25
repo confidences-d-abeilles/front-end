@@ -18,10 +18,12 @@ const getStatusInformation = (status) => {
   }
 };
 
-const Order = ({ price, id, products, status }) => {
+const Order = ({
+  price, id: orderId, products, status,
+}) => {
   const dispatch = useDispatch();
 
-  const checkoutCb = useCallback(() => dispatch(checkout(id)), [id]);
+  const checkoutCb = useCallback(() => dispatch(checkout(orderId)), [orderId]);
   const [severity, readableStatus] = getStatusInformation(status);
 
   return (
@@ -30,7 +32,8 @@ const Order = ({ price, id, products, status }) => {
         Commande du 13 avril 2020
         <Badge severity={severity}>{readableStatus}</Badge>
       </h3>
-      {products.map(({ id, name, quantity }, index) => <p key={index}>{`${name} (${quantity})`}</p>)}
+      {/* eslint-disable-next-line react/no-array-index-key,react/prop-types */}
+      {products.map(({ id, name, quantity }, index) => <p key={`${id} ${index}`}>{`${name} (${quantity})`}</p>)}
       <p style={{ textAlign: 'right' }}>
         {stringifyAmount(price)}
         {status === 0 && <Button onClick={checkoutCb} flat primary>Régler</Button>}
@@ -42,6 +45,8 @@ const Order = ({ price, id, products, status }) => {
 Order.propTypes = {
   price: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
+  status: PropTypes.number.isRequired,
+  products: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Order;

@@ -1,27 +1,25 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import QR from 'qrcode.react';
 import Input from '@cda/input';
 import { Rows } from '@cda/flex/src';
 import Button from '@cda/button/src';
 
-import { fetchManageBeehiveAction, updateBeehive, uploadBeehiveAction } from './beehive.actions';
-import { getBeehive } from './beehive.selectors';
+import { updateBeehive, uploadBeehiveAction } from './beehive.actions';
 import useInput from '../../../../hooks/useInput';
 import News from './news/newPanel';
 import H2 from '../../../../components/h2';
 import Card from '../../../../components/card';
 import ImageGallery from '../../../../components/imageGallery';
+import useApi from '../../../../hooks/useApi';
+import Loading from '../../../../components/loading';
 
 const Component = ({ beehiveId }) => {
   const dispatch = useDispatch();
   const fileInput = useRef();
-  useEffect(() => {
-    dispatch(fetchManageBeehiveAction(beehiveId));
-  }, []);
 
-  const beehive = useSelector((state) => getBeehive(state));
+  const beehive = useApi('beehive', beehiveId);
 
   const [newId, handleNewId, setNewId] = useInput(beehive
     && beehive.identifier ? beehive.identifier : '');
@@ -43,7 +41,7 @@ const Component = ({ beehiveId }) => {
   }, [beehive]);
 
   if (!beehive || beehive.id !== beehiveId) {
-    return null;
+    return <Loading />;
   }
 
   const {
