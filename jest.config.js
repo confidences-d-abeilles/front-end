@@ -5,7 +5,6 @@
 module.exports = {
   // All imported modules in your tests should be mocked automatically
   automock: true,
-
   collectCoverageFrom: [
     'src/**/*.{js,jsx}',
     '!**/node_modules/**',
