@@ -3,23 +3,26 @@ import React from 'react';
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, errorMessage: null };
   }
 
-  static getDerivedStateFromError(error) {
-    // Mettez à jour l'état, de façon à montrer l'UI de repli au prochain rendu.
-    return { hasError: true };
+  static getDerivedStateFromError({ message }) {
+    return { hasError: true, errorMessage: message };
   }
 
-  componentDidCatch(error, errorInfo) {
-    // Vous pouvez aussi enregistrer l'erreur au sein d'un service de rapport.
-    console.error(error, errorInfo);
-  }
 
   render() {
-    if (this.state.hasError) {
-      return <h1>Something went wrong.</h1>;
+    const { hasError, errorMessage } = this.state;
+
+    if (hasError) {
+      return (
+        <>
+          <h1>Something went wrong.</h1>
+          <p>{errorMessage}</p>
+        </>
+      );
     }
+
     return this.props.children;
   }
 }

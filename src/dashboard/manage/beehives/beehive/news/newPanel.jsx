@@ -44,7 +44,7 @@ const News = ({ data, beehiveId }) => {
   return (
     <Rows>
       <Item>
-        {data.map((item, index) => <NewsItem data={item} onClick={() => setSelectedNews(index)} />)}
+        {data.map((item, index) => <NewsItem data={item} onClick={() => setSelectedNews(index)} key={item.id} />)}
         <Button onClick={create}>Ajouter</Button>
       </Item>
       <Item>
@@ -59,10 +59,7 @@ const News = ({ data, beehiveId }) => {
 };
 
 News.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.objectOf({
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
   beehiveId: PropTypes.string.isRequired,
 };
 

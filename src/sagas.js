@@ -12,6 +12,8 @@ import beehiveManageSagas from './dashboard/manage/beehives/beehive/beehive.saga
 import signupSagas from './signup/signup.sagas';
 import addressSagas from './address/address.sagas';
 import wishSagas from './wish/wish.sagas';
+import manageSubscriptionsSagas from './dashboard/manage/subscriptions/subscriptions.sagas';
+import manageUserSagas from './dashboard/manage/users/edit/editUser.sagas';
 
 export default function* rootSaga() {
   yield all([
@@ -26,5 +28,7 @@ export default function* rootSaga() {
     signupSagas(),
     addressSagas(),
     wishSagas(),
+    manageSubscriptionsSagas(),
+    manageUserSagas(),
   ]);
 }

@@ -9,6 +9,7 @@ import Beehive from './widgets/beehive';
 import useInput from '../../../hooks/useInput';
 import Search from './widgets/search';
 import H2 from '../../../components/h2';
+import Card from '../../../components/card';
 
 const Beehives = () => {
   const dispatch = useDispatch();
@@ -38,7 +39,8 @@ const Beehives = () => {
         <Search />
       </Rows>
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      {data.map((beehive) => <Beehive {...beehive} key={beehive.id} />)}
+      {data
+        .map((beehive) => <Card key={beehive.id}><Beehive {...beehive} key={beehive.id} /></Card>)}
     </div>
   );
 };

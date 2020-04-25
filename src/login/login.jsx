@@ -17,7 +17,7 @@ const CustomRows = styled(Rows)`
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { message, accessToken, loading, initialEmail, initialPassword } = useSelector(getLogin);
+  const { message, loading, email: initialEmail, password: initialPassword } = useSelector(getLogin);
   const [email, handleEmail, setEmail] = useInput(initialEmail);
   const [password, handlePassword, setPassword] = useInput(initialPassword);
 

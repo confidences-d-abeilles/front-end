@@ -1,4 +1,5 @@
-import { combineReducers } from 'redux';
+import
+{ combineReducers } from 'redux';
 
 import login from './login/login.reducer';
 import information from './dashboard/information/information.reducer';
@@ -11,6 +12,7 @@ import manageBeehive from './dashboard/manage/beehives/beehive/beehive.reducer';
 import signup from './signup/signup.reducer';
 import address from './address/address.reducer';
 import wish from './wish/wish.reducer';
+import manageSubscriptions from './dashboard/manage/subscriptions/subscriptions.reducer';
 
 const rootReducer = combineReducers({
   login,
@@ -24,6 +26,7 @@ const rootReducer = combineReducers({
   signup,
   address,
   wish,
+  manageSubscriptions,
 });
 
 export default rootReducer;

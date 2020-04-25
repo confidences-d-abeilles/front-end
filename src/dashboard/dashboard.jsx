@@ -19,6 +19,8 @@ const Restrict = loadable(() => import(/* webpackChunkName: "restrict" */ '../ut
 const Beehives = loadable(() => import(/* webpackChunkName: "beehives" */ './manage/beehives/beehives'));
 const Users = loadable(() => import(/* webpackChunkName: "users" */ './manage/users/users'));
 const Beehive = loadable(() => import(/* webpackChunkName: "manageBeehive" */ './manage/beehives/beehive/beehive'));
+const ManageSubscriptions = loadable(() => import(/* webpackChunkName: "manageSubscriptions" */ './manage/subscriptions/subscriptions'));
+const ManageUser = loadable(() => import(/* webpackChunkName: "manageUser" */ './manage/users/edit/editUser'));
 
 const LeftItem = styled(Item)`
   width: 25rem;
@@ -197,6 +199,8 @@ const Dashboard = ({ logout }) => {
           <Beehives path="manage/beehives" />
           <Beehive path="manage/beehive/:beehiveId" />
           <Users path="manage/users" />
+          <ManageUser path="manage/users/:id" />
+          <ManageSubscriptions path="manage/subscriptions" />
         </Router>
       </Item>
     </Rows>

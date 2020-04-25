@@ -23,7 +23,8 @@ const Component = ({ beehiveId }) => {
 
   const beehive = useSelector((state) => getBeehive(state));
 
-  const [newId, handleNewId, setNewId] = useInput(beehive ? beehive.identifier : null);
+  const [newId, handleNewId, setNewId] = useInput(beehive
+    && beehive.identifier ? beehive.identifier : '');
 
   const onSubmit = useCallback((e) => {
     e.preventDefault();
@@ -38,7 +39,7 @@ const Component = ({ beehiveId }) => {
   }, [newId]);
 
   useEffect(() => {
-    setNewId(beehive ? beehive.identifier : null);
+    setNewId(beehive && beehive.identifier ? beehive.identifier : '');
   }, [beehive]);
 
   if (!beehive || beehive.id !== beehiveId) {
