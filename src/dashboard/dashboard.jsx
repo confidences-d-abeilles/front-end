@@ -9,7 +9,6 @@ import logo from '../logo-square.png';
 import me from '../me.png';
 
 import { logoutAction } from '../login/login.actions';
-import { fetchInformation } from './information/information.actions';
 import { fetchOrdersAction } from './orders/orders.actions';
 
 const Information = loadable(() => import(/* webpackChunkName: "information" */ './information/information'));
@@ -97,7 +96,6 @@ const Dashboard = ({ logout }) => {
 
 
   useEffect(() => {
-    dispatch(fetchInformation());
     dispatch(fetchOrdersAction());
   }, []);
 

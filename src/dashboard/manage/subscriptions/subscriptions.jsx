@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchSubscriptionsAction } from './subscriptions.actions';
+import React from 'react';
 import H2 from '../../../components/h2';
 import Card from '../../../components/card';
+import useApi from '../../../hooks/useApi';
+import Loading from '../../../components/loading';
 
 const Subscriptions = () => {
-  const dispatch = useDispatch();
-  const subscriptions = useSelector(({ manageSubscriptions }) => manageSubscriptions.subscriptions);
+  const subscriptions = useApi('subscription', 'all');
 
-  useEffect(() => {
-    dispatch(fetchSubscriptionsAction());
-  }, []);
+  if (!subscriptions) {
+    return <Loading />;
+  }
 
   return (
     <>

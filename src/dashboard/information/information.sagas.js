@@ -3,23 +3,8 @@ import { put, takeEvery } from 'redux-saga/effects';
 import pick from 'ramda/src/pick';
 import {
   EDIT_INFORMATION, EDIT_INFORMATION_FAIL, EDIT_INFORMATION_SUCCESS,
-  FETCH_INFORMATION,
-  FETCH_INFORMATION_FAIL,
-  FETCH_INFORMATION_SUCCESS,
 } from './information.actions';
 import client from '../../utils/fetch';
-
-function* fetchInformation() {
-  try {
-    const { data } = yield client.request({
-      method: 'get',
-      url: '/user',
-    });
-    yield put({ type: FETCH_INFORMATION_SUCCESS, user: data });
-  } catch (e) {
-    yield put({ type: FETCH_INFORMATION_FAIL });
-  }
-}
 
 function* editInformation(data) {
   try {
@@ -30,14 +15,12 @@ function* editInformation(data) {
       data: pick(fields, data),
     });
     yield put({ type: EDIT_INFORMATION_SUCCESS, user: data });
-    yield put({ type: FETCH_INFORMATION });
   } catch (e) {
     yield put({ type: EDIT_INFORMATION_FAIL });
   }
 }
 
 function* informationSagas() {
-  yield takeEvery(FETCH_INFORMATION, fetchInformation);
   yield takeEvery(EDIT_INFORMATION, editInformation);
 }
 

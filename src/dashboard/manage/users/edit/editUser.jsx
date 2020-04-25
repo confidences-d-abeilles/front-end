@@ -1,16 +1,27 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { fetchUser } from './editUser.actions';
+import H2 from '../../../../components/h2';
+import Loading from '../../../../components/loading';
+import useApi from '../../../../hooks/useApi';
 
 const EditUser = ({ id }) => {
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchUser(id));
-  }, []);
+  const user = useApi('user', '26');
 
-  return null;
+  if (!user) {
+    return <Loading />;
+  }
+
+  return (
+    <>
+      <H2>{`${user.firstname} ${user.name}`}</H2>
+      <p>
+        {user.email}
+        <br />
+        {user.phone}
+      </p>
+    </>
+  );
 };
 
 EditUser.propTypes = {

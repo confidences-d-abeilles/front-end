@@ -1,14 +1,18 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { fetchBeehiveAction } from './beehive.actions';
+import useApi from '../hooks/useApi';
+import Loading from '../components/loading';
 
-const Beehive = ({
-  name, fetch, beehiveId, news, images,
-}) => {
-  useEffect(() => {
-    fetch(beehiveId);
-  }, []);
+const Beehive = ({ beehiveId }) => {
+  const beehive = useApi('beehive', beehiveId);
+
+  if (!beehive) {
+    return <Loading />;
+  }
+
+  const {
+    name, news, images,
+  } = beehive;
 
   return (
     <div>
@@ -20,19 +24,7 @@ const Beehive = ({
 };
 
 Beehive.propTypes = {
-  name: PropTypes.string.isRequired,
-  fetch: PropTypes.func.isRequired,
   beehiveId: PropTypes.string.isRequired,
-  news: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-  images: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-const mapStateToProps = ({ beehive }) => ({
-  ...beehive,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  fetch: (id) => dispatch(fetchBeehiveAction(id)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Beehive);
+export default Beehive;
