@@ -1,2 +1,2 @@
 
-export default (amount) => `${amount / 100} €`;
+export default (amount) => typeof amount === 'number' && `${amount / 100} €`;
