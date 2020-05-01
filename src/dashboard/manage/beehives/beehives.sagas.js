@@ -24,6 +24,9 @@ function* fetchBeehives({ search }) {
 
 function* createBeehive({ name }) {
   try {
+    if (!name.length) {
+      throw new Error('Le nom doit contenir au moins un caractère');
+    }
     yield client.request({
       method: 'post',
       url: '/beehive',
@@ -34,7 +37,7 @@ function* createBeehive({ name }) {
     yield put({ type: CREATE_BEEHIVE_SUCCESS });
     yield put({ type: FETCH_BEEHIVES });
   } catch (e) {
-    yield put({ type: CREATE_BEEHIVE_FAIL });
+    yield put({ type: CREATE_BEEHIVE_FAIL, message: e.message });
   }
 }
 

@@ -18,6 +18,7 @@ const Beehives = loadable(() => import(/* webpackChunkName: "beehives" */ './man
 const Users = loadable(() => import(/* webpackChunkName: "users" */ './manage/users/users'));
 const Beehive = loadable(() => import(/* webpackChunkName: "manageBeehive" */ './manage/beehives/beehive/beehive'));
 const ManageSubscriptions = loadable(() => import(/* webpackChunkName: "manageSubscriptions" */ './manage/subscriptions/subscriptions'));
+const ManageSubscription = loadable(() => import(/* webpackChunkName: "manageSubscription" */ './manage/subscriptions/subscription/subscription'));
 const ManageUser = loadable(() => import(/* webpackChunkName: "manageUser" */ './manage/users/edit/editUser'));
 
 const LeftItem = styled(Item)`
@@ -123,6 +124,14 @@ const Dashboard = () => {
             <br />
           </Restrict>
           <Restrict allowed={['admin']}>
+            <Link to="/dashboard/manage/orders">
+              <ClickableItem active={path === '/dashboard/manage/orders'}>
+                Commandes
+              </ClickableItem>
+            </Link>
+            <br />
+          </Restrict>
+          <Restrict allowed={['admin']}>
             <Link to="/dashboard/manage/subscriptions">
               <ClickableItem active={path === '/dashboard/manage/subscriptions'}>
                 Parrainages
@@ -190,10 +199,11 @@ const Dashboard = () => {
           <Subscriptions path="subscriptions" />
           <Orders path="orders" />
           <Beehives path="manage/beehives" />
-          <Beehive path="manage/beehive/:beehiveId" />
+          <Beehive path="manage/beehives/:beehiveId" />
           <Users path="manage/users" />
           <ManageUser path="manage/users/:id" />
           <ManageSubscriptions path="manage/subscriptions" />
+          <ManageSubscription path="manage/subscriptions/:id" />
         </Router>
       </Item>
     </Rows>

@@ -1,8 +1,8 @@
 import React from 'react';
 import H2 from '../../../components/h2';
-import Card from '../../../components/card';
-import useApi from '../../../hooks/useApi';
 import Loading from '../../../components/loading';
+import Item from './widget/subscriptionListItem';
+import useApi from '../../../hooks/useApi';
 
 const Subscriptions = () => {
   const subscriptions = useApi('subscription', 'all');
@@ -14,7 +14,8 @@ const Subscriptions = () => {
   return (
     <>
       <H2>Gestion des parrainages</H2>
-      {subscriptions.map(({ product, id }) => <Card key={id}>{product.name}</Card>)}
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+      {subscriptions.map((subscription) => <Item key={subscription.id} {...subscription} />)}
     </>
   );
 };
